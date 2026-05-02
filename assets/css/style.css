@@ -1,0 +1,719 @@
+/* =============================================
+   CERTO WEBSITE - CUSTOM CSS
+   Matches: certosoftware.com reference design
+   ============================================= */
+
+/* ---- CSS VARIABLES ---- */
+:root {
+  --yellow:        #F5A623;
+  --yellow-light:  #FAB93A;
+  --dark-navy:     #1A1A2E;
+  --purple:        #3C3C9E;
+  --purple-deep:   #2D2D8A;
+  --blue-border:   #4444CC;
+  --hero-white-bg: #EEF1F8;
+  --white:         #FFFFFF;
+  --text-dark:     #111827;
+  --text-body:     #374151;
+  --text-muted:    #6B7280;
+  --star-gold:     #F5A623;
+  --border-light:  #E5E7EB;
+  --card-shadow:   0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* ---- RESET & BASE ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+
+a { text-decoration: none; color: inherit; }
+
+img { max-width: 100%; display: block; }
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+.navbar {
+  background: var(--white);
+  padding: 16px 0;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+.navbar-logo-fallback {
+  display: none;
+  width: 38px;
+  height: 38px;
+}
+
+.brand-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--dark-navy);
+  letter-spacing: -0.3px;
+}
+
+.navbar .nav-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dark-navy);
+  padding: 6px 14px !important;
+  transition: color .2s;
+}
+
+.navbar .nav-link:hover { color: var(--yellow); }
+
+.btn-signin {
+  background: var(--purple) !important;
+  color: var(--white) !important;
+  border-radius: 50px !important;
+  padding: 8px 26px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  transition: background .2s;
+}
+.btn-signin:hover { background: var(--purple-deep) !important; }
+
+/* =============================================
+   HERO SECTION
+   Layout:
+     - Full section bg = var(--hero-white-bg) light blueish-grey
+     - Left half: white card with text (relative, inside container)
+     - Right half: yellow panel (absolute, positioned right 0)
+     - Phone mockup: absolute, sitting on top of yellow panel
+   ============================================= */
+#hero {
+  position: relative;
+  background: var(--hero-white-bg);
+  overflow: hidden;
+  min-height: 540px;
+  display: flex;
+  align-items: stretch;
+}
+
+/* ── YELLOW PANEL (right 50%) ── */
+.hero-yellow-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--yellow);
+  z-index: 1;
+
+  /* Blue/indigo frame — thicker on left & top only (right bleeds off screen) */
+  border-top:    6px solid var(--blue-border);
+  border-left:   6px solid var(--blue-border);
+  border-bottom: 6px solid var(--blue-border);
+}
+
+/* Background person image tinted yellow */
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+.hero-yellow-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 166, 35, 0.18); /* soft yellow tint */
+  z-index: 3;
+}
+
+/* ── PHONE MOCKUP (floats over yellow panel) ── */
+/*
+ * Place your phone mockup PNG at:  assets/images/dummy-phone.png
+ * The <img> will fill this wrapper.
+ * The CSS fallback (.hero-phone-mockup) shows when image is missing.
+ */
+.hero-phone-wrap {
+  position: absolute;
+  /* horizontally centred inside the yellow panel */
+  left: calc(50% + 30px);          /* ~centre of yellow panel */
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  width: 235px;
+}
+
+.hero-phone-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 28px;
+ /* box-shadow: 0 28px 70px rgba(0,0,0,0.42);*/
+}
+
+/* CSS fallback phone shell (visible only when image missing) */
+.hero-phone-mockup {
+  width: 235px;
+  background: #111827;
+  border-radius: 28px;
+  border: 5px solid #2a2a2a;
+  padding: 14px 12px 18px;
+  box-shadow: 0 28px 70px rgba(0,0,0,0.42);
+}
+
+.phone-statusbar {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255,255,255,.55);
+  font-size: 7px;
+  margin-bottom: 8px;
+}
+
+.phone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.phone-header-title { color: #fff; font-size: 11px; font-weight: 700; }
+
+.phone-upgrade-badge {
+  background: var(--yellow);
+  color: var(--dark-navy);
+  font-size: 7px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: .5px;
+}
+
+.phone-scan-btn-wrap { display: flex; justify-content: center; margin: 8px 0 6px; }
+
+.phone-scan-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: conic-gradient(var(--yellow) 270deg, rgba(245,166,35,.18) 0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-navy);
+  font-size: 13px;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 0 0 6px rgba(245,166,35,.18);
+}
+
+.phone-last-scan {
+  text-align: center;
+  color: rgba(255,255,255,.4);
+  font-size: 6.5px;
+  margin-bottom: 8px;
+}
+
+.phone-rows { display: flex; flex-direction: column; gap: 4px; }
+
+.phone-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,.06);
+  border-radius: 7px;
+  padding: 6px 8px;
+}
+
+.phone-row-icon { color: var(--yellow); font-size: 11px; flex-shrink: 0; }
+.phone-row-text { flex: 1; min-width: 0; }
+.phone-row-title { color: #fff; font-size: 8px; font-weight: 600; }
+.phone-row-sub { color: rgba(255,255,255,.4); font-size: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.phone-row-end { color: rgba(255,255,255,.35); font-size: 9px; }
+
+/* ── WHITE TEXT CARD (left) ── */
+.hero-white-card {
+  position: relative;
+  z-index: 10;
+  padding: 80px 0 80px 0;
+}
+
+.hero-content h1 {
+  font-size: 46px;
+  font-weight: 800;
+  color: var(--dark-navy);
+  line-height: 1.15;
+  margin-bottom: 22px;
+}
+
+.hero-content p {
+  font-size: 15.5px;
+  color: var(--text-body);
+  line-height: 1.7;
+  margin-bottom: 38px;
+  max-width: 430px;
+}
+
+.hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-certo-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--yellow);
+  color: var(--dark-navy);
+  border: none;
+  border-radius: 8px;
+  padding: 13px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  transition: opacity .2s, transform .15s;
+  cursor: pointer;
+}
+.btn-certo-primary:hover { opacity: .86; transform: translateY(-2px); color: var(--dark-navy); }
+
+.btn-certo-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--dark-navy);
+  border: 2px solid var(--dark-navy);
+  border-radius: 8px;
+  padding: 11px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  transition: all .2s;
+  cursor: pointer;
+}
+.btn-certo-outline:hover { background: var(--dark-navy); color: var(--white); }
+
+/* Hero container must be on top of yellow panel */
+#hero > .container { position: relative; z-index: 5; }
+
+/* =============================================
+   TESTIMONIALS SECTION
+   ============================================= */
+#testimonials {
+  background: var(--yellow);
+  padding: 70px 0;
+}
+
+#testimonials h2 {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--dark-navy);
+  margin-bottom: 40px;
+}
+
+.testimonial-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 24px 20px;
+  height: 100%;
+  box-shadow: var(--card-shadow);
+}
+
+.stars { color: var(--star-gold); font-size: 15px; letter-spacing: 2px; margin-bottom: 12px; }
+.testimonial-text { font-size: 13.5px; color: var(--text-body); line-height: 1.65; margin-bottom: 16px; }
+.testimonial-author { font-size: 13px; font-weight: 700; color: var(--dark-navy); }
+
+/* =============================================
+   FEATURED IN SECTION
+   ============================================= */
+#featured {
+  background: var(--yellow);
+  padding: 30px 0 44px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+}
+
+.featured-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark-navy);
+  white-space: nowrap;
+  margin-right: 30px; /* increased space */
+  font-family: 'Poppins', sans-serif;
+  flex-shrink: 0;
+}
+
+
+.featured-logos {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.featured-logo-item { display: flex; align-items: center; }
+
+/*
+ * ┌─────────────────────────────────────────────────────────┐
+ * │  FEATURED-IN LOGO IMAGE PLACEHOLDERS                    │
+ * │                                                         │
+ * │  The <img> in each .featured-logo-item loads from:      │
+ * │    assets/images/feature1.png  →  CNBC                  │
+ * │    assets/images/feature2.png  →  New York Post          │
+ * │    assets/images/feature3.png  →  Financial Times        │
+ * │    assets/images/feature4.png  →  Reader's Digest        │
+ * │    assets/images/feature5.png  →  ZDNet                  │
+ * │    assets/images/feature6.png  →  WIRED                  │
+ * │                                                         │
+ * │  Just drop your PNG/SVG files in assets/images/         │
+ * │  with those exact filenames.                            │
+ * └─────────────────────────────────────────────────────────┘
+ */
+.featured-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  /* darken logos so they show well on yellow background */
+  filter: brightness(0);
+  transition: filter .2s;
+}
+.featured-logo-img:hover { filter: brightness(0) invert(0.1); }
+
+/* Text fallbacks — only shown if image fails to load (onerror) */
+.featured-logo-fallback { font-family: 'Poppins', sans-serif; }
+
+.logo-cnbc-text {
+  font-size: 26px;   /* increased */
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: #000;
+}
+
+.logo-nypost {
+  font-family: Georgia, serif;
+  font-size: 17px;   /* increased */
+  font-weight: 700;
+  color: #000;
+  font-style: italic;
+}
+
+/* FT stays same (already balanced) */
+.logo-ft {
+  display: flex !important;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo-ft-box {
+  background: #fff1e0;
+  border: 2px solid #000;
+  color: #000;
+  font-weight: 900;
+  font-size: 13px;
+  padding: 2px 4px;
+}
+
+.logo-ft-text {
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #000;
+}
+
+/* Readers Digest stays same */
+.logo-readers {
+  font-family: Georgia, serif;
+  font-size: 13px;
+  font-weight: 700;
+  font-style: italic;
+  color: #000;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ZDNET stays same */
+.logo-zdnet {
+  display: flex !important;
+  align-items: center;
+}
+
+.logo-zdnet .zd {
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 0 3px;
+}
+
+.logo-zdnet .net {
+  font-size: 15px;
+  font-weight: 900;
+  color: #000;
+}
+
+/* WIRED reduced (FIXED) */
+.logo-wired {
+  display: flex !important;
+  align-items: center;
+}
+
+.logo-wired span {
+  font-size: 13px;   /* decreased */
+  font-weight: 800;  /* slightly reduced intensity */
+  color: #fff;
+  background: #000;
+  padding: 2px 3px;
+  letter-spacing: -0.5px;
+}
+
+/* =============================================
+   ABOUT SECTION
+   ============================================= */
+#about { padding: 90px 0; background: var(--white); }
+
+#about .col-lg-6 img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+
+.about-content h2 { font-size: 32px; font-weight: 800; color: var(--dark-navy); line-height: 1.25; margin-bottom: 20px; }
+.about-content p  { font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 32px; }
+
+/* =============================================
+   FEATURES SECTION
+   ============================================= */
+#features { background: var(--white); padding: 80px 0; }
+
+#features h2 { font-size: 32px; font-weight: 800; color: var(--dark-navy); text-align: center; margin-bottom: 52px; }
+
+.feature-card { text-align: center; padding: 20px 14px; }
+
+.feature-icon-wrap {
+  width: 66px;
+  height: 66px;
+  border-radius: 18px;
+  background: #FFF8EC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  font-size: 28px;
+}
+
+.feature-card h5 { font-size: 15px; font-weight: 700; color: var(--dark-navy); margin-bottom: 10px; }
+.feature-card p  { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; }
+
+.features-cta { margin-top: 44px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* =============================================
+   CTA CARDS SECTION
+   ============================================= */
+#cta-cards { padding: 50px 0; background: var(--white); }
+
+.cta-card { border-radius: 16px; padding: 34px 28px; height: 100%; }
+.cta-card.yellow { background: var(--yellow); }
+.cta-card.gray   { background: #F3F4F6; border: 1px solid var(--border-light); }
+
+.cta-card h4 { font-size: 19px; font-weight: 700; color: var(--dark-navy); margin-bottom: 10px; }
+.cta-card p  { font-size: 14px; color: var(--dark-navy); opacity: .8; margin-bottom: 22px; line-height: 1.6; }
+
+.btn-cta-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--dark-navy);
+  color: var(--white);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background .2s;
+}
+.btn-cta-dark:hover { background: var(--purple); color: var(--white); }
+
+.btn-cta-link { color: var(--dark-navy); font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+
+/* =============================================
+   SPY BANNER SECTION
+   ============================================= */
+#spy-banner { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%); padding: 80px 0; text-align: center; }
+
+#spy-banner h2 { font-size: 32px; font-weight: 800; color: var(--white); margin-bottom: 12px; }
+#spy-banner .banner-sub { font-size: 16px; color: rgba(255,255,255,.75); margin-bottom: 30px; }
+
+.banner-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+.btn-banner-yellow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--yellow); color: var(--dark-navy);
+  border-radius: 8px; padding: 13px 24px; font-size: 14px; font-weight: 700;
+  font-family: 'Poppins', sans-serif; transition: opacity .2s;
+}
+.btn-banner-yellow:hover { opacity: .88; color: var(--dark-navy); }
+
+.btn-banner-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--white);
+  border: 2px solid var(--white); border-radius: 8px;
+  padding: 11px 24px; font-size: 14px; font-weight: 700;
+  font-family: 'Poppins', sans-serif; transition: all .2s;
+}
+.btn-banner-outline:hover { background: var(--white); color: var(--dark-navy); }
+
+/* =============================================
+   INSIGHTS SECTION
+   ============================================= */
+#insights { padding: 80px 0; background: var(--white); }
+#insights h2 { font-size: 32px; font-weight: 800; color: var(--dark-navy); text-align: center; margin-bottom: 40px; }
+
+.insight-card { border-radius: 16px; overflow: hidden; background: var(--white); border: 1px solid var(--border-light); box-shadow: var(--card-shadow); height: 100%; transition: transform .2s, box-shadow .2s; }
+.insight-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+
+.insight-card-img { position: relative; width: 100%; height: 180px; overflow: hidden; }
+.insight-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.insight-badge { position: absolute; top: 10px; left: 10px; background: var(--yellow); color: var(--dark-navy); font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 5px; text-transform: uppercase; letter-spacing: .5px; }
+
+.insight-card-body { padding: 20px 18px; }
+.insight-card-body h5 { font-size: 15px; font-weight: 700; color: var(--dark-navy); margin-bottom: 10px; line-height: 1.4; }
+.insight-card-body p  { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; }
+
+.btn-view-all {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--yellow); color: var(--dark-navy);
+  border-radius: 8px; padding: 13px 28px; font-size: 14px; font-weight: 700;
+  font-family: 'Poppins', sans-serif; transition: opacity .2s;
+}
+.btn-view-all:hover { opacity: .88; color: var(--dark-navy); }
+
+/* =============================================
+   FOOTER
+   ============================================= */
+footer { background: var(--dark-navy); color: var(--white); padding: 64px 0 30px; }
+
+.footer-tagline { font-size: 12px; color: rgba(255,255,255,.5); font-style: italic; letter-spacing: .5px; margin-bottom: 10px; }
+
+.footer-brand { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.brand-dot { color: var(--yellow); }
+
+.footer-socials { display: flex; gap: 10px; margin-bottom: 18px; }
+
+.footer-social-btn { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 14px; transition: background .2s; }
+.footer-social-btn:hover { background: var(--yellow); color: var(--dark-navy); }
+
+.footer-legal { font-size: 11px; color: rgba(255,255,255,.35); line-height: 1.7; }
+
+.footer-nav-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 14px; }
+
+.footer-nav-links { list-style: none; padding: 0; }
+.footer-nav-links li { margin-bottom: 10px; }
+.footer-nav-links a { color: rgba(255,255,255,.7); font-size: 14px; transition: color .2s; }
+.footer-nav-links a:hover { color: var(--yellow); }
+
+.newsletter-box { background: var(--yellow); border-radius: 14px; padding: 28px 24px; }
+.newsletter-box h5 { font-size: 16px; font-weight: 700; color: var(--dark-navy); margin-bottom: 8px; }
+.newsletter-box p  { font-size: 13px; color: var(--dark-navy); opacity: .8; margin-bottom: 16px; line-height: 1.55; }
+
+.newsletter-input-group { display: flex; background: var(--white); border-radius: 8px; overflow: hidden; }
+.newsletter-input { flex: 1; border: none; padding: 10px 14px; font-size: 13px; outline: none; color: var(--dark-navy); background: transparent; }
+.newsletter-submit { background: var(--dark-navy); color: var(--white); border: none; padding: 10px 18px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background .2s; }
+.newsletter-submit:hover { background: var(--purple); }
+
+.footer-divider { border-top: 1px solid rgba(255,255,255,.08); margin-top: 44px; padding-top: 20px; }
+.footer-bottom-text { font-size: 11.5px; color: rgba(255,255,255,.3); line-height: 1.6; }
+
+/* =============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================= */
+
+/* Tablet ≤ 991px */
+@media (max-width: 991px) {
+  #hero { min-height: auto; flex-direction: column; }
+}
+.hero-phone-wrap {
+  position: absolute;
+  top: 50%;
+  left: 70%;   /* move LEFT by decreasing this value */
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  width: 235px;
+}
+.hero-yellow-bg {
+  border-top: 12px solid var(--blue-border);
+  border-left: 12px solid var(--blue-border);
+  border-bottom: none;
+}
+.hero-white-card {
+  padding: 80px 0 80px 80px;
+}
+
+.hero-content {
+  max-width: 520px;
+}
+
+
+  #testimonials h2, .about-content h2, #features h2, #spy-banner h2, #insights h2 { font-size: 26px; }
+
+
+/* Mobile ≤ 767px */
+@media (max-width: 767px) {
+  .hero-content h1 { font-size: 28px; }
+  .hero-content p  { font-size: 14px; }
+  .hero-buttons    { flex-direction: column; align-items: flex-start; }
+
+  .hero-yellow-bg { height: 300px; }
+  .hero-phone-wrap { width: 165px; }
+
+  .featured-logos { gap: 18px; }
+  .banner-buttons { flex-direction: column; align-items: center; }
+  .features-cta   { flex-direction: column; align-items: center; }
+}
+.btn-certo-primary,
+.btn-certo-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 13px 22px;
+
+  border-radius: 9999px; /* THIS is pill shape */
+}
+
+.hero-phone-wrap {
+  position: absolute;
+  top: 45%;     /* 👈 moves it UP */
+  left: 15%;    /* 👈 moves it MORE LEFT */
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 235px;
+}
+
+
+/* Small Mobile ≤ 400px */
+@media (max-width: 400px) {
+  .hero-content h1 { font-size: 24px; }
+  .hero-yellow-bg { height: 260px; }
+}
+.hero-yellow-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--yellow);
+  z-index: 1;
+
+  position: absolute;
+}
