@@ -663,7 +663,7 @@ footer { background: var(--dark-navy); color: var(--white); padding: 64px 0 30px
 }
 
 
-  #testimonialsh2, .about-content h2, #features h2, #spy-banner h2, #insights h2 { font-size: 26px; }
+  #testimonialsh2,.about-content h2, #features h2, #spy-banner h2, #insights h2 { font-size: 26px; }
 
 
 /* Mobile ≤ 767px */
